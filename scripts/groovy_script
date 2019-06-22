@@ -1,0 +1,23 @@
+pipeline{
+    agent {docker 'rppavan/wildfly-maven'}
+    stages {
+        stage('Git pull') {
+            steps{
+                git branch: 'dev',
+                        credentialsId: '5596bb7d-93ea-430a-b1eb-e98ff236fbe1',
+                        url: 'https://github.com/c0deX1/another-test.git'
+                sh 'mvn clean install'
+            }
+        }
+        stage('Docker deployment'){
+            steps{
+                sh 'echo "todo"'
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
